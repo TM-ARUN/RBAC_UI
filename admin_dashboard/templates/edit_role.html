@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "dashboard.html" %}
+    <title>Edit Role</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <div class="form-section">
+                <form name="" action="/edit_role2/{{rleedit.id}}" method="post" onsubmit="return showAlertOnSubmit()">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="" style="margin-left: 27px;">Role Name:<span>*</span></label>
+                        <input type="text" id="" name="role_name" placeholder="Enter role..." value="{{rleedit.Role_name}}" readonly>
+                        <label for="" style="margin-left: 47px;">Description:<span>*</span></label>
+                        <input type="text" id="" name="Description" placeholder="Enter description..." value="{{rleedit.Description}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="" style="margin-left: 27px;">Assign Permission: <span>*</span></label>
+                        {% for permission in permissions %}
+                        <input type="checkbox" name="permissions" value="{{ permission.id }}"  {% if permission in rleedit.Assigned_permission.all %}checked{% endif %}>
+                        <label for="permission_{{ permission.id }}">{{ permission.Name }}</label><br>
+                        {% endfor %}  
+                        <label for="status">Status: <span>*</span></label>
+                        <select name="status" required>
+                            <option value="active" {% if rleedit.Status == "active" %}selected{% endif %}>Active</option>
+                            <option value="inactive" {% if rleedit.Status == "inactive" %}selected{% endif %}>Inactive</option>
+                        </select>  
+    
+                    </div>  
+                    <div class="button-group" style="margin-top: 40px;">
+                        <button>Edit Role</button>   
+                    </div> 
+                </form>
+                <!-- {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+               {% endfor %}
+                </ul>
+                {% endif %} -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        © 2024 Share & Care Palliative Care. All Rights Reserved.
+    </footer>
+    <script>
+        function showAlertOnSubmit() {
+            // Perform validation or other logic here if needed
+    
+            // Show a success alert
+            alert('User added successfully!');
+            
+            // Allow form submission
+            return true;
+        }
+    </script>
+
+</body>
+</html>

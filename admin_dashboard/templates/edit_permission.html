@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "dashboard.html" %}
+    <title>Edit Management</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="main-content">
+        <div class="form-section">
+            <form name="" action="/edit_permission2/{{pedit.id}}" method="post" onsubmit="return showAlertOnSubmit()">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="" style="margin-left: 27px;">Permission Name: <span>*</span></label>
+                    <input type="text" id="" name="Permission" placeholder="Permission here.." required value="{{pedit.Name}}" readonly>
+                    <label for="" style="margin-left: 47px;">Description <span>*</span></label>
+                    <input type="text" id="" name="description" placeholder="Description here.." required value="{{pedit.description}}">
+                </div>
+                 
+                <div class="button-group" style="margin-top: 40px;">
+                    <button>Edit Permission</button>   
+                </div> 
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    © 2024 Share & Care Palliative Care. All Rights Reserved.
+</footer>
+<script>
+    function showAlertOnSubmit() {
+
+        alert('Permission edited successfully!');
+        
+        
+        return true;
+    }
+</script>
+</html>

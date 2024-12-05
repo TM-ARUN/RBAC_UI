@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "dashboard.html" %}
+    <title>User Management</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="form-section">
+                <form name="" action="/add_user/" method="post" onsubmit="return showAlertOnSubmit()">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="" style="margin-left: 27px;">Username: <span>*</span></label>
+                        <input type="text" id="" name="username" placeholder="Enter Username" required>
+                        <label for="" style="margin-left: 47px;">Email: <span>*</span></label>
+                        <input type="email" id="" name="email" placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <label for="" style="margin-left: 27px;">Role: <span>*</span></label>
+                        <select name="role" required>
+                            <option value="">Select Role</option>
+                            {% for role in roles %}
+                            <option value="{{ role.id }}">{{ role.Role_name }}</option>
+                            {% endfor %}
+                           
+                        </select>   
+                        <label for="status" style="margin-left: 44px;">Status: <span>*</span></label>
+                        <select name="status" required>
+                            <option value="">Select Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>  
+    
+                    </div>  
+                    <div class="button-group" style="margin-top: 40px;">
+                        <button>Add User</button>   
+                    </div> 
+                </form>
+            </div>
+            
+            <table class="designation-table" style="margin-left: 25px; margin-top: 40px;">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email Id</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Action</th>   
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for rs in users %}
+                        <td>{{rs.Username}}</td>
+                        <td>{{rs.Email}}</td>
+                        <td>{{rs.Roles.Role_name}}</td>
+                        <td>{{rs.Status}}</td>
+                        <td>
+                            <a href="/edit_user/{{rs.id}}"><button>Edit User</button></a><br>
+                            <a href="/delete_user/{{rs.id}}" onclick=""><button style="margin-top: 10px;">Delete User</button></a>
+                        </td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                <button disabled>Previous</button>
+                <button class="current-page">1</button>
+                <button>Next</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        © 2024 Share & Care Palliative Care. All Rights Reserved.
+    </footer>
+    <script>
+        function showAlertOnSubmit() {
+            // Perform validation or other logic here if needed
+    
+            // Show a success alert
+            alert('User added successfully!');
+            
+            // Allow form submission
+            return true;
+        }
+    </script>
+</body>
+</html>

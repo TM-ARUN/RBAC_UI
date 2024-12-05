@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "dashboard.html" %}
+    <title>Edit User</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="form-section">
+                <form name="" action="/edit_user2/{{edt_user.id}}" method="post" onsubmit="return showAlertOnSubmit()">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="" style="margin-left: 27px;">Username: <span>*</span></label>
+                        <input type="text" id="" name="username" placeholder="Enter Username" required value="{{edt_user.Username}}">
+                        <label for="" style="margin-left: 47px;">Email: <span>*</span></label>
+                        <input type="email" id="" name="email" placeholder="Email Address" value="{{edt_user.Email}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="" style="margin-left: 27px;">Role: <span>*</span></label>
+                        <select name="role" required>
+                            <option value="">Select Role</option>
+                            {% for role in roles %}
+                                <option value="{{ role.id }}" {% if role.id == edt_user.Roles.id %}selected{% endif %}>{{ role.Role_name }}</option>
+                            {% endfor %}
+                        </select>   
+                        <label for="status" style="margin-left: 44px;">Status: <span>*</span></label>
+                        <select name="status" required>
+                            <option value="">Select Status</option>
+                            <option value="active" {% if edt_user.Status == "active" %}selected{% endif %}>Active</option>
+                            <option value="inactive" {% if edt_user.Status == "inactive" %}selected{% endif %}>Inactive</option>
+                        </select>  
+    
+                    </div>  
+                    <div class="button-group" style="margin-top: 40px;">
+                        <button>Edit User</button>   
+                    </div> 
+                </form>
+            </div>
+            
+            
+
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+        © 2024 Share & Care Palliative Care. All Rights Reserved.
+    </footer>
+    <script>
+        function showAlertOnSubmit() {
+            // Perform validation or other logic here if needed
+    
+            // Show a success alert
+            alert('User edited successfully!');
+            
+            // Allow form submission
+            return true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "dashboard.html" %}
+    <title>Role Management</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <div class="form-section">
+                <form name="" action="/add_role/" method="post" onsubmit="return showAlertOnSubmit()">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="" style="margin-left: 27px;">Role Name:<span>*</span></label>
+                        <input type="text" id="" name="role_name" placeholder="Enter role..." required>
+                        <label for="" style="margin-left: 47px;">Description:<span>*</span></label>
+                        <input type="text" id="" name="Description" placeholder="Enter description...">
+                    </div>
+                    <div class="form-group">
+                        <label for="" style="margin-left: 27px;">Assign Permission: <span>*</span></label>
+                        {% for permission in permissions %}
+                        <input type="checkbox" name="permissions" value="{{ permission.id }}">
+                        <label for="permission_{{ permission.id }}">{{ permission.Name }}</label><br>
+                        {% endfor %}  
+                        <label for="status">Status: <span>*</span></label>
+                        <select name="status" required>
+                            <option value="">Select Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>  
+    
+                    </div>  
+                    <div class="button-group" style="margin-top: 40px;">
+                        <button>Add Role</button>   
+                    </div> 
+                </form>
+                <!-- {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+               {% endfor %}
+                </ul>
+                {% endif %} -->
+            </div>
+            
+            <table class="designation-table" style="margin-left: 25px; margin-top: 40px;">
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Description</th>
+                        <th>Assigned Permission</th>
+                        <th>Status</th>
+                        <th>Action</th>   
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for role in rle %}
+                        <td>{{role.Role_name}}</td>
+                        <td>{{role.Description}}</td>
+                        <td>
+                            {% for perm in role.Assigned_permission.all %}
+                            {{ perm.Name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{role.Status}}</td>
+                        <td>
+                            <a href="/edit_role/{{role.id}}"><button>Edit Role</button></a><br>
+                            <a href="/delete_role/{{role.id}}" onclick=""><button style="margin-top: 10px;">Delete Role</button></a>
+                        </td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                <button disabled>Previous</button>
+                <button class="current-page">1</button>
+                <button>Next</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        © 2024 Share & Care Palliative Care. All Rights Reserved.
+    </footer>
+    <script>
+        function showAlertOnSubmit() {
+            // Perform validation or other logic here if needed
+    
+            // Show a success alert
+            alert('User added successfully!');
+            
+            // Allow form submission
+            return true;
+        }
+    </script>
+
+</body>
+</html>

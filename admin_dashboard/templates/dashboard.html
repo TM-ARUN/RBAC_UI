@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Style the header with a grey background and some padding */
+        .header {
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; /* Vertically center items */
+            background-color: #f1f1f1;
+            padding: 20px 10px;
+        }
+
+        /* Style the menu icon */
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #111;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            margin-right: 10px; /* Add space between icon and logo */
+        }
+
+        .openbtn:hover {
+            background-color: #444;
+        }
+
+        /* Style the logo */
+        .header a.logo {
+            font-size: 25px;
+            font-weight: bold;
+            text-decoration: none;
+            color: black;
+        }
+
+        /* The sidepanel menu */
+        .sidepanel {
+            height: 100%; /* Full height */
+            width: 0; /* 0 width - hidden initially */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Stay on top */
+            top: 0;
+            left: 0;
+            background-color: #111; /* Black background */
+            overflow-x: hidden; /* Disable horizontal scroll */
+            padding-top: 60px; /* Place content 60px from the top */
+            transition: 0.5s; /* Smooth transition effect */
+        }
+
+        /* The sidepanel links */
+        .sidepanel a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidepanel a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Position and style the close button (top right corner) */
+        .sidepanel .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="openbtn" onclick="openNav()">&#9776;</button>
+        <a href="#default" class="logo">Admin Dashboard</a>
+    </div>
+
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/user1/">User Management</a>
+        <a href="/rolemanage/">Role Management</a>
+        <a href="/permissionmanage/">Permission Management</a>
+    </div>
+
+    <script>
+        /* Set the width of the sidebar to 250px (show it) */
+        function openNav() {
+            document.getElementById("mySidepanel").style.width = "250px";
+        }
+
+        /* Set the width of the sidebar to 0 (hide it) */
+        function closeNav() {
+            document.getElementById("mySidepanel").style.width = "0";
+        }
+        
+    </script>
+</body>
+</html>

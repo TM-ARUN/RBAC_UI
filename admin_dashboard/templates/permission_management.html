@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "dashboard.html" %}
+    <title>Permission Management</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="main-content">
+        <div class="form-section">
+            <form name="" action="/add_permission/" method="post" onsubmit="return showAlertOnSubmit()">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="" style="margin-left: 27px;">Permission Name: <span>*</span></label>
+                    <input type="text" id="" name="Permission" placeholder="Permission here.." required>
+                    <label for="" style="margin-left: 47px;">Description <span>*</span></label>
+                    <input type="text" id="" name="description" placeholder="Description here.." required>
+                </div>
+                 
+                <div class="button-group" style="margin-top: 40px;">
+                    <button>Add Permission</button>   
+                </div> 
+            </form>
+        </div>
+        
+        <table class="designation-table" style="margin-left: 25px; margin-top: 40px;">
+            <thead>
+                <tr>
+                    <th>Permission</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Action</th>   
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for rs in ps %}
+                    <td>{{rs.Name}}</td>
+                    <td>{{rs.description}}</td>
+                    <td>{{rs.Status}}</td>
+                    <td>
+                        <a href="/edit_permission/{{rs.id}}"><button>Edit Permission</button></a><br>
+                        <a href="/delete_permission/{{rs.id}}" onclick=""><button style="margin-top: 10px;">Delete Permission</button></a>
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <button disabled>Previous</button>
+            <button class="current-page">1</button>
+            <button>Next</button>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    © 2024 Share & Care Palliative Care. All Rights Reserved.
+</footer>
+<script>
+    function showAlertOnSubmit() {
+        // Perform validation or other logic here if needed
+
+        // Show a success alert
+        alert('User added successfully!');
+        
+        // Allow form submission
+        return true;
+    }
+</script>
+</html>
